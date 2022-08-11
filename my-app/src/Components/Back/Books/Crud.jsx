@@ -1,6 +1,6 @@
 import Nav from "../Nav"
 import Create from "./Create"
-
+import List from "./List"
 
 
 function BooksCrud() {
@@ -9,6 +9,7 @@ function BooksCrud() {
         <>
      <Nav/>
      <Create/>
+     <List/>
     
         </>
     )
