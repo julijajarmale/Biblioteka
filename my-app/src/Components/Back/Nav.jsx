@@ -14,12 +14,12 @@ function Nav() {
                                         color: '#f34091'
                                     } : null
                             }>Admin</NavLink>
-                            <NavLink to="/admin/products" className="nav-link" style={
+                            <NavLink to="/admin/books" className="nav-link" style={
                                 ({ isActive }) =>
                                     isActive ? {
                                         color: '#f34091'
                                     } : null
-                            }>Products</NavLink>
+                            }>Books</NavLink>
                     
                             <NavLink to="/" className="nav-link" style={
                                 ({ isActive }) =>
