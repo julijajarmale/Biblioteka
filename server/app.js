@@ -120,7 +120,46 @@ app.post("/login", (req, res) => {
 });
 
 
+//READ BOOKS
+app.get("/admin/books", (req, res) => {
+    const sql = `
+  SELECT *
+  
+  FROM books 
 
+  `;
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
+
+
+  //CREATE BOOKS
+app.post("/admin/books", (req, res) => {
+    const sql = `
+    INSERT INTO books
+    (title, author, photo)
+    VALUES (?, ?, ?)
+    `;
+    con.query(
+      sql,
+      [
+        req.body.title,
+        req.body.author,
+        req.body.photo,
+       
+        
+      ],
+      (err, result) => {
+        if (err) throw err;
+        res.send({
+          result,
+          msg: { text: "OK, new and shiny product was created", type: "success" },
+        });
+      }
+    );
+  });
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

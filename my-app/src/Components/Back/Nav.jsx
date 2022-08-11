@@ -19,14 +19,14 @@ function Nav() {
                                     isActive ? {
                                         color: '#f34091'
                                     } : null
-                            }>Books</NavLink>
+                            }>Knygos</NavLink>
                     
                             <NavLink to="/" className="nav-link" style={
                                 ({ isActive }) =>
                                     isActive ? {
                                         color: '#f34091'
                                     } : null
-                            }>Main Page</NavLink>
+                            }>Pradinis puslapis</NavLink>
                             <Link to="/logout">Logout</Link>
                               
                         </nav>
