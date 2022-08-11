@@ -161,6 +161,48 @@ app.post("/admin/books", (req, res) => {
     );
   });
 
+
+
+  //DELETE BOOKS
+app.delete("/admin/books/:id", (req, res) => {
+    const sql = `
+    DELETE FROM books
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+      if (err) throw err;
+      res.send({ result, msg: { text: "OK, Product gone", type: "success" } });
+    });
+  });
+  
+  //EDIT BOOKS
+  
+  app.put("/admin/books/:id", (req, res) => {
+    const sql = `
+    UPDATE books
+    
+    SET title = ?, author = ?, photo = ?
+    WHERE id = ?
+    `;
+    con.query(
+      sql,
+      [
+        req.body.title,
+        req.body.author,
+        req.body.photo,
+        req.params.id,
+      ],
+      (err, result) => {
+        if (err) throw err;
+        res.send({
+          result,
+          msg: { text: "OK, Cat updated. Now it is as new", type: "success" },
+        });
+      }
+    );
+  });
+  
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

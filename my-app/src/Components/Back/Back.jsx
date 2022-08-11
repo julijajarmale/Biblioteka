@@ -12,6 +12,9 @@ function Back({show}) {
     const [lastUpdate, setLastUpdate] = useState(Date.now());
     const [books, setBooks] = useState(null)
     const [createBook, setCreateBook] = useState(null)
+    const [deleteBook, setDeleteBook] = useState(null)
+    const [editBook, setEditBook] = useState(null)
+    const [modalBook, setModalBook] = useState(null)
 
 //READ BOOKS 
 useEffect(() => {
@@ -31,11 +34,36 @@ useEffect(() => {
     
 }, [createBook]);
 
+//DELETE BOOKS
+useEffect(() => {
+    if (null === deleteBook) return;
+    axios.delete('http://localhost:3003/admin/books/' + deleteBook.id, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+    
+}, [deleteBook]);
+
+// EDIT BOOK
+useEffect(() => {
+        
+    if (null === editBook) return;
+    axios.put('http://localhost:3003/admin/books/' + editBook.id, editBook, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+       
+}, [editBook]);
+
 
     return (
         <BackContext.Provider value={{
             setCreateBook,
             books,
+            setDeleteBook,
+            setEditBook,
+            modalBook,
+            setModalBook
            
 
             
