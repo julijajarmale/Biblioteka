@@ -205,7 +205,7 @@ app.delete("/admin/books/:id", (req, res) => {
   //READ FRONT BOOKS
 app.get("/books", (req, res) => {
     const sql = `
-  SELECT *
+    SELECT books.id, books.title, books.author, books.photo
   FROM books
   ORDER BY title
   `;
@@ -218,7 +218,7 @@ app.get("/books", (req, res) => {
   //READ RESERVATION
 app.get("/reservation", (req, res) => {
     const sql = `
-  SELECT reservation.id, reservation.name,  reservation.date, reservation.date_end, reservation.book_id
+  SELECT reservation.id, reservation.name,  reservation.date, reservation.date_end, reservation.book_id, books.title AS title, books.author AS author, books.photo AS photo
   FROM reservation
   LEFT JOIN books
   ON books.id = reservation.book_id 

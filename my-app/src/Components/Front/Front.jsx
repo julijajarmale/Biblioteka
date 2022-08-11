@@ -6,13 +6,15 @@ import axios from "axios";
 import { authConfig } from "../../Functions/auth";
 import { useEffect, useState } from "react";
 import BooksList from "./List";
+import ReservationList from "./ReservationList";
+
 
 
 function Front() {
 
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [books, setBooks] = useState(null);
-  const [reservation, setReservation] = useState(null);
+  const [reservations, setReservations] = useState(null);
   const [createReservation, setCreateReservation] = useState(null);
 
 //READ BOOKS
@@ -25,7 +27,7 @@ function Front() {
  useEffect(() => {
   axios
     .get("http://localhost:3003/reservation", authConfig())
-    .then((res) => setReservation(res.data));
+    .then((res) => setReservations(res.data));
 }, [lastUpdate]);
 
 //CREATE RES
@@ -42,12 +44,15 @@ useEffect(() => {
     <FrontContext.Provider
       value={{
        books,
-       reservation, 
+       reservations, 
        setCreateReservation
       }}
     >
       <FrontNav />
       <div className="container">
+      <div className="row">
+         <ReservationList/>
+        </div>
         <div className="row">
           <BooksList/>
         </div>

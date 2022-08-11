@@ -4,7 +4,7 @@ import FrontContext from "./FrontContext";
 
 function Book({ book }) {
 
-  const { reservation, setCreateReservation} = useContext(FrontContext);
+  const { setCreateReservation} = useContext(FrontContext);
 
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
