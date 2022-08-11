@@ -218,7 +218,7 @@ app.get("/books", (req, res) => {
   //READ RESERVATION
 app.get("/reservation", (req, res) => {
     const sql = `
-  SELECT reservation.id, reservation.name,  reservation.date, reservation.date_end, reservation.book_id, books.title AS title, books.author AS author, books.photo AS photo
+  SELECT reservation.id, reservation.name,  reservation.date, reservation.date_end, reservation.book_id, books.title AS title, books.author AS author, books.photo AS photo, approved, next_date
   FROM reservation
   LEFT JOIN books
   ON books.id = reservation.book_id 
@@ -230,7 +230,7 @@ app.get("/reservation", (req, res) => {
     });
   });
   
-  //CREATE DONOR
+  //CREATE Reservation
   app.post("/reservation", (req, res) => {
     const sql = `
     INSERT INTO reservation
@@ -255,6 +255,90 @@ app.get("/reservation", (req, res) => {
       }
     );
   });
+
+
+  //READ BACK RESERVATIONS
+app.get("/admin/reservations", (req, res) => {
+    const sql = `
+    SELECT reservation.id, reservation.name,  reservation.date, reservation.date_end, reservation.book_id, books.title AS title, books.author AS author, books.photo AS photo, approved, next_date 
+    FROM reservation
+    LEFT JOIN books
+    ON books.id = reservation.book_id 
+    ORDER BY name
+  
+
+  `;
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
+
+
+   //DELETE RESERVATION
+app.delete("/admin/reservations/:id", (req, res) => {
+    const sql = `
+    DELETE FROM reservation
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+      if (err) throw err;
+      res.send({ result, msg: { text: "OK, Product gone", type: "success" } });
+    });
+  });
+
+
+  //EDIT RESERVATIONS
+  
+  app.put("/admin/reservations/:id", (req, res) => {
+    const sql = `
+    UPDATE reservation
+    
+    SET approved = ?
+    WHERE id = ?
+    `;
+    con.query(
+      sql,
+      [
+        req.body.approved,
+        req.params.id,
+      ],
+      (err, result) => {
+        if (err) throw err;
+        res.send({
+          result,
+          msg: { text: "OK, Cat updated. Now it is as new", type: "success" },
+        });
+      }
+    );
+  });
+
+  //EDIT RESERVATIONS
+  app.put("/admin/reservations/:id", (req, res) => {
+    const sql = `
+    UPDATE reservation
+    
+    SET next_date = ?
+    WHERE id = ?
+    `;
+    con.query(
+      sql,
+      [
+        req.body.newDate,
+        req.params.id,
+      ],
+      (err, result) => {
+        if (err) throw err;
+        res.send({
+          result,
+          msg: { text: "OK, Cat updated. Now it is as new", type: "success" },
+        });
+      }
+    );
+  });
+
+
+
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

@@ -15,6 +15,13 @@ function Back({show}) {
     const [deleteBook, setDeleteBook] = useState(null)
     const [editBook, setEditBook] = useState(null)
     const [modalBook, setModalBook] = useState(null)
+    const [reservations, setReservations] = useState(null)
+    const [deleteReservation, setDeleteReservation] = useState(null)
+    const [approveReservation, setApproveReservation] = useState(null)
+    const [extendReservation, setExtendReservation] = useState(null)
+
+   
+
 
 //READ BOOKS 
 useEffect(() => {
@@ -55,6 +62,44 @@ useEffect(() => {
        
 }, [editBook]);
 
+//READ RESERVATION
+useEffect(() => {
+    axios.get('http://localhost:3003/admin/reservations', authConfig())
+        .then(res => setReservations(res.data));
+}, [lastUpdate]);
+
+//DELETE Reservation
+useEffect(() => {
+    if (null === deleteReservation) return;
+    axios.delete('http://localhost:3003/admin/reservations/' + deleteReservation.id, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+    
+}, [deleteReservation]);
+
+// EDIT RESERVATION
+useEffect(() => {
+        
+    if (null === approveReservation) return;
+    axios.put('http://localhost:3003/admin/reservations/' + approveReservation.id, approveReservation, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+       
+}, [approveReservation]);
+
+// EDIT RESERVATION
+useEffect(() => {
+        
+    if (null === extendReservation) return;
+    axios.put('http://localhost:3003/admin/reservations/' + extendReservation.id, extendReservation, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+       
+}, [extendReservation]);
+
 
     return (
         <BackContext.Provider value={{
@@ -63,7 +108,11 @@ useEffect(() => {
             setDeleteBook,
             setEditBook,
             modalBook,
-            setModalBook
+            setModalBook,
+            reservations,
+            setDeleteReservation,
+            setApproveReservation,
+            setExtendReservation
            
 
             

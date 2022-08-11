@@ -20,6 +20,12 @@ function Reservation({ reservation,}) {
         <span className="item">{reservation.name}</span>
         <span className="item">{reservation.date}</span>
         <span className="item">{reservation.date_end}</span>
+        <span
+          className="item"
+          style={{ color: reservation.approved ? "green" : "red" }}
+        >
+          {reservation.approved ? "Rezervacija patvirtinta, galite atsiimti knygą" : "Rezervacija laukia patvirtinimo"}
+        </span>
       </div>
     </li>
     );
