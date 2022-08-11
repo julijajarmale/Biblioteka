@@ -215,6 +215,47 @@ app.get("/books", (req, res) => {
     });
   });
 
+  //READ RESERVATION
+app.get("/reservation", (req, res) => {
+    const sql = `
+  SELECT reservation.id, reservation.name,  reservation.date, reservation.date_end, reservation.book_id
+  FROM reservation
+  LEFT JOIN books
+  ON books.id = reservation.book_id 
+  ORDER BY name
+  `;
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
+  
+  //CREATE DONOR
+  app.post("/reservation", (req, res) => {
+    const sql = `
+    INSERT INTO reservation
+    (name, date, date_end, book_id)
+    VALUES (?, ?, ?, ?)
+    `;
+    con.query(
+      sql,
+      [
+        req.body.name,
+        req.body.date,
+        req.body.endDate,
+        req.body.book
+        
+      ],
+      (err, result) => {
+        if (err) throw err;
+        res.send({
+          result,
+          msg: { text: "OK, new and shiny product was created", type: "success" },
+        });
+      }
+    );
+  });
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
