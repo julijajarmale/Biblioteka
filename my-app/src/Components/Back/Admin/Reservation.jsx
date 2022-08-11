@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext,  useState } from "react";
 import setDateFormat from "../../../Functions/setDateFormat";
 import BackContext from "../BackContext";
 
 function Reservation({ reservation }) {
   const { setDeleteReservation, setApproveReservation, setExtendReservation } = useContext(BackContext);
 
-  const [newDate, setNewDate]= useState("");
+  const [nextDate, setNextDate]= useState("");
 
   const handleDelete = () => {
     setDeleteReservation(reservation);
@@ -24,14 +24,19 @@ function Reservation({ reservation }) {
   
     const handleNewDate = () => {
         const data = { 
-         next_date: newDate,
+         nextDate: nextDate,
          reservation: reservation.id
+     
         
         };
-        setExtendReservation(data);
-        setNewDate(setDateFormat);
+    
+        setExtendReservation({id: reservation.id, next_date: nextDate});
+        setNextDate(setDateFormat(nextDate));
         console.log(data)
         console.log(reservation.id)
+        console.log(reservation)
+
+        
       };
   
 
@@ -46,8 +51,8 @@ function Reservation({ reservation }) {
                 type="date"
                 className="input"
                 placeholder="Knygos pavadinimas"
-                onChange={(e) => setNewDate(e.target.value)}
-                value={newDate}
+                onChange={(e) => setNextDate(e.target.value)}
+                value={nextDate}
               />
               <button onClick={handleNewDate}>Pratęsti rezervaciją</button>
             </div>

@@ -10,12 +10,15 @@ import ReservationList from "./ReservationList";
 
 
 
+
 function Front() {
 
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [books, setBooks] = useState(null);
   const [reservations, setReservations] = useState(null);
   const [createReservation, setCreateReservation] = useState(null);
+
+  
 
 //READ BOOKS
   useEffect(() => {
@@ -40,15 +43,20 @@ useEffect(() => {
 }, [createReservation]);
 
 
+
   return (
     <FrontContext.Provider
       value={{
        books,
        reservations, 
-       setCreateReservation
+       setCreateReservation,
+       
+
       }}
     >
-      <FrontNav />
+      
+                    
+                    <FrontNav />
       <div className="container">
       <div className="row">
          <ReservationList/>
@@ -57,7 +65,10 @@ useEffect(() => {
           <BooksList/>
         </div>
       </div>
-      
+                    
+                   
+            
+                   
       
     </FrontContext.Provider>
   );

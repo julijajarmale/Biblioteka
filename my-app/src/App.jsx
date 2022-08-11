@@ -11,7 +11,7 @@ import {
 import Front from "./Components/Front/Front";
 import Back from "./Components/Back/Back";
 import { useEffect, useState } from "react";
-import { login, logout, authConfig } from "./Functions/auth";
+import { login, logout, authConfig,} from "./Functions/auth";
 import axios from "axios";
 
 function App() {
@@ -19,10 +19,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+        path="/"
           element={
             <RequireAuth role="user">
-              <Front />
+              <Front/>
             </RequireAuth>
           }
         />
@@ -125,4 +125,11 @@ function LogoutPage() {
   useEffect(() => logout(), []);
   return <Navigate to="/login" replace />;
 }
+
+
+
+
+
+
+
 export default App;

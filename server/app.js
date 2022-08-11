@@ -324,7 +324,7 @@ app.delete("/admin/reservations/:id", (req, res) => {
     con.query(
       sql,
       [
-        req.body.newDate,
+        req.body.nextDate,
         req.params.id,
       ],
       (err, result) => {
@@ -336,6 +336,7 @@ app.delete("/admin/reservations/:id", (req, res) => {
       }
     );
   });
+
 
 
 
