@@ -202,6 +202,18 @@ app.delete("/admin/books/:id", (req, res) => {
     );
   });
   
+  //READ FRONT BOOKS
+app.get("/books", (req, res) => {
+    const sql = `
+  SELECT *
+  FROM books
+  ORDER BY title
+  `;
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
