@@ -18,8 +18,8 @@ function Reservation({ reservation,}) {
           {reservation.author} 
         </span>
         <span className="item">{reservation.name}</span>
-        <span className="item">{reservation.date}</span>
-        <span className="item">{reservation.date_end}</span>
+        <span className="item">{new Date(Date.parse(reservation.date)).toLocaleString()}</span>
+        <span className="item">{new Date(Date.parse(reservation.date_end)).toLocaleString()}</span>
         <span
           className="item"
           style={{ color: reservation.approved ? "green" : "red" }}

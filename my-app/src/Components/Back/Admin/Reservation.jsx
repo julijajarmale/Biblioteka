@@ -44,8 +44,9 @@ function Reservation({ reservation }) {
     <li className="admin-list-item">
       <div className="content">
         <b className="item">{reservation.title}</b>
-        <span className="item">Pradžios data:{reservation.date}</span>
-        <span className="item">Pabaigos data:{reservation.date_end}</span>
+        <i className="item">{reservation.name}</i>
+        <span className="item">Pradžios data:{new Date(Date.parse(reservation.date)).toLocaleString()}</span>
+        <span className="item">Pabaigos data:{new Date(Date.parse(reservation.date_end)).toLocaleString()}</span>
         <div className="form-row">
               <input
                 type="date"
