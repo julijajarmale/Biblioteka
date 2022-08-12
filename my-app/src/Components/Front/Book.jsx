@@ -11,17 +11,19 @@ function Book({ book }) {
   const [endDate, setEndDate] = useState("");
   
 
-  const handleDonate = () => {
+  const handleCreateReservation = () => {
     const data = {
       name,
       date: date,
       endDate: endDate,
+      next_date: endDate,
       book: book.id,
     };
     setCreateReservation(data);
     setName("");
     setDate(setDateFormat);
     setEndDate(setDateFormat);
+   
    
   };
 
@@ -74,7 +76,7 @@ function Book({ book }) {
                 />
               </div>
 
-              <button type="button" className="btn" onClick={handleDonate}>
+              <button type="button" className="btn" onClick={handleCreateReservation}>
                 Rezervuoti
               </button>
             </div>

@@ -234,8 +234,8 @@ app.get("/reservation", (req, res) => {
   app.post("/reservation", (req, res) => {
     const sql = `
     INSERT INTO reservation
-    (name, date, date_end, book_id)
-    VALUES (?, ?, ?, ?)
+    (name, date, date_end, next_date, book_id)
+    VALUES (?, ?, ?, ?, ?)
     `;
     con.query(
       sql,
@@ -243,6 +243,7 @@ app.get("/reservation", (req, res) => {
         req.body.name,
         req.body.date,
         req.body.endDate,
+        req.body.next_date,
         req.body.book
         
       ],

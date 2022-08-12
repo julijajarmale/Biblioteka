@@ -24,14 +24,14 @@ function Reservation({ reservation }) {
   
     const handleNewDate = () => {
         const data = { 
-         nextDate: nextDate,
+         next_date: nextDate,
          reservation: reservation.id
      
         
         };
     
-        setExtendReservation({id: reservation.id, next_date: nextDate});
-        setNextDate(setDateFormat(nextDate));
+        setExtendReservation(data);
+        setNextDate(setDateFormat);
         console.log(data)
         console.log(reservation.id)
         console.log(reservation)
