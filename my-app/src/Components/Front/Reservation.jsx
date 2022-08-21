@@ -1,8 +1,13 @@
+import { useState } from "react";
 
 
 function Reservation({ reservation,}) {
 
+  const [rate, setRate] = useState(0);
    
+  const rateNow = (e) => {
+    setRate(e.target.value);
+  }
     return (
         <li className="book-list-item">
       <div className="content">
@@ -26,6 +31,18 @@ function Reservation({ reservation,}) {
         >
           {reservation.approved ? "Rezervacija patvirtinta, galite atsiimti knygą" : "Rezervacija laukia patvirtinimo"}
         </span>
+        <b
+          className="item">
+            Įvertinkite paslaugos kokybę:
+        <select value={rate} onChange={rateNow}>
+            {[...Array(10)].map((_, i) => (
+              <option key={i} value={10 - i}>
+                {10 - i} *
+              </option>
+            ))}
+          </select>
+          {rate ? Number(rate).toFixed(2) : '0.00'}
+          </b>
       </div>
     </li>
     );

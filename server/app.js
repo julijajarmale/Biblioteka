@@ -355,18 +355,6 @@ app.delete("/admin/reservations/:id", (req, res) => {
   });
 
 
-// READ USERS
-app.get('/users', (req, res) => {
-  const sql = `
-    SELECT
-  id, name, email, role
-    FROM users
-    `;
-  con.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
 
 
 app.get("/", (req, res) => {

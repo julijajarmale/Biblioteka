@@ -10,6 +10,3 @@ export const authConfig = () => {
     }
 }
 
-export const register = key => {
-    localStorage.setItem('session', key);
-}
