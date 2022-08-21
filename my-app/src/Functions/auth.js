@@ -9,3 +9,7 @@ export const authConfig = () => {
         headers: { Authorization: `${localStorage.getItem('session') ?? ''}` }
     }
 }
+
+export const register = key => {
+    localStorage.setItem('session', key);
+}

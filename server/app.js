@@ -119,6 +119,22 @@ app.post("/login", (req, res) => {
   });
 });
 
+app.post("/register", (req, res) => {
+  const key = uuid.v4();
+  const sql = `
+  INSERT INTO users
+  (name, email, pass, session)
+  VALUES (?, ?, ?, ?)
+`;
+  con.query(sql, [req.body.user, req.body.email, md5(req.body.pass), key], (err, result) => {
+    if (err) throw err;
+    if (!result.affectedRows) {
+      res.send({ msg: 'error', key: '' });
+    } else {
+      res.send({ msg: 'ok', key });
+    }
+  });
+});
 
 //READ BOOKS
 app.get("/admin/books", (req, res) => {
@@ -339,7 +355,18 @@ app.delete("/admin/reservations/:id", (req, res) => {
   });
 
 
-
+// READ USERS
+app.get('/users', (req, res) => {
+  const sql = `
+    SELECT
+  id, name, email, role
+    FROM users
+    `;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
 
 app.get("/", (req, res) => {

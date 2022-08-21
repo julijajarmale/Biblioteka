@@ -14,6 +14,7 @@ function FrontNav() {
                                         color: 'crimson'
                                     } : null
                             }>Admin</NavLink>
+                             <NavLink to="/logout">Logout</NavLink>
                            
                               
                         </nav>
