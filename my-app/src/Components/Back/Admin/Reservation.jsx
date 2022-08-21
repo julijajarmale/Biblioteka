@@ -43,10 +43,10 @@ function Reservation({ reservation }) {
   return (
     <li className="admin-list-item">
       <div className="content">
-        <b className="item">{reservation.title}</b>
-        <i className="item">{reservation.name}</i>
-        <span className="item">Pradžios data:{new Date(Date.parse(reservation.date)).toLocaleString()}</span>
-        <span className="item">Pabaigos data:{new Date(Date.parse(reservation.date_end)).toLocaleString()}</span>
+        <b className="admin-item">{reservation.title}</b>
+        <i className="admin-item">{reservation.name}</i>
+        <span className="admin-item">Pradžios data:{new Date(Date.parse(reservation.date)).toLocaleString()}</span>
+        <span className="admin-item">Pabaigos data:{new Date(Date.parse(reservation.date_end)).toLocaleString()}</span>
         <div className="form-row">
               <input
                 type="date"
@@ -55,7 +55,7 @@ function Reservation({ reservation }) {
                 onChange={(e) => setNextDate(e.target.value)}
                 value={nextDate}
               />
-              <button onClick={handleNewDate}>Pratęsti rezervaciją</button>
+              <button className="button btn5" onClick={handleNewDate}>Pratęsti rezervaciją</button>
             </div>
         <span
           className="item"

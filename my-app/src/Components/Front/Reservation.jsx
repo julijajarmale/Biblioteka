@@ -9,7 +9,7 @@ function Reservation({ reservation,}) {
     setRate(e.target.value);
   }
     return (
-        <li className="book-list-item">
+      <li className="book-list-item">
       <div className="content">
         <div className="book-item">
           {reservation.photo ? (
