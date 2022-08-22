@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import FrontContext from "./FrontContext";
 import Reservation from "./Reservation";
+import Sort from "./Sort";
 
 
 function ReservationList() {
@@ -10,6 +11,7 @@ function ReservationList() {
    
         <div className="col-12 ">
           <h2>Jūsų rezervacijos</h2>
+          <Sort/>
           <div className="book-list-group">
           <ul className="book-list">
             {reservations

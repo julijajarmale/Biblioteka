@@ -57,6 +57,7 @@ useEffect(() => {
       value={{
        books,
        reservations, 
+       setReservations,
        setCreateReservation,
        setRateNow,
        
