@@ -24,83 +24,84 @@ const con = mysql.createConnection({
 });
 
 
-// LOGINAI IR ROLES
-const doAuth = function(req, res, next) {
-  if (0 === req.url.indexOf('/admin')) { // admin
-      const sql = `
+// ///////////////DO AUTH////////////
+const doAuth = function (req, res, next) {
+  if (0 === req.url.indexOf('/admin')) {
+    // admin
+    const sql = `
       SELECT
       name, role
       FROM users
       WHERE session = ?
   `;
-      con.query(
-          sql, [req.headers['authorization'] || ''],
-          (err, results) => {
-              if (err) throw err;
-              if (!results.length || results[0].role !== 'admin') {
-                  res.status(401).send({});
-                  req.connection.destroy();
-              } else {
-                  next();
-              }
-          }
-      );
+    con.query(
+      sql, [req.headers['authorization'] || ''],
+      (err, results) => {
+        if (err) throw err;
+        if (!results.length || results[0].role !== 'admin') {
+          res.status(401).send({});
+          req.connection.destroy();
+        } else {
+          next();
+        }
+      }
+    );
   } else if (0 === req.url.indexOf('/login-check') || 0 === req.url.indexOf('/login')) {
-      next();
-  } else { // fron
-      const sql = `
-      SELECT
-      name, role
-      FROM users
-      WHERE session = ?
-  `;
-      con.query(
-          sql, [req.headers['authorization'] || ''],
-          (err, results) => {
-              if (err) throw err;
-              if (!results.length) {
-                  res.status(401).send({});
-                  req.connection.destroy();
-              } else {
-                  next();
-              }
-          }
-      );
+    next();
+  } else {
+    // Front
+    const sql = `
+    SELECT
+    name, role
+    FROM users
+    WHERE session = ?
+`;
+    con.query(
+      sql, [req.headers['authorization'] || ''],
+      (err, results) => {
+        if (err) throw err;
+        if (!results.length) {
+          res.status(401).send({});
+          req.connection.destroy();
+        } else {
+          next();
+        }
+      }
+    );
   }
 }
 app.use(doAuth)
 
-// AUTH
+//Auth
 app.get("/login-check", (req, res) => {
   let sql;
   let requests;
   if (req.query.role === 'admin') {
-      sql = `
+    sql = `
       SELECT
       name
       FROM users
       WHERE session = ? AND role = ?
       `;
-      requests = [req.headers['authorization'] || '', req.query.role];
+    requests = [req.headers['authorization'] || '', req.query.role];
   } else {
-      sql = `
+    sql = `
       SELECT
       name
       FROM users
       WHERE session = ?
       `;
-      requests = [req.headers['authorization'] || ''];
+    requests = [req.headers['authorization'] || ''];
   }
   con.query(sql, requests, (err, result) => {
-      if (err) throw err;
-      if (!result.length) {
-          res.send({ msg: 'error' });
-      } else {
-          res.send({ msg: 'ok' });
-      }
+    if (err) throw err;
+    if (!result.length) {
+      res.send({ msg: 'error' });
+    } else {
+      res.send({ msg: 'ok' });
+    }
   });
 });
-
 
 app.post("/login", (req, res) => {
   const key = uuid.v4();
@@ -110,12 +111,12 @@ app.post("/login", (req, res) => {
   WHERE name = ? AND pass = ?
 `;
   con.query(sql, [key, req.body.user, md5(req.body.pass)], (err, result) => {
-      if (err) throw err;
-      if (!result.affectedRows) {
-          res.send({ msg: 'error', key: '' });
-      } else {
-          res.send({ msg: 'ok', key });
-      }
+    if (err) throw err;
+    if (!result.affectedRows) {
+      res.send({ msg: 'error', key: '' });
+    } else {
+      res.send({ msg: 'ok', key });
+    }
   });
 });
 
@@ -135,6 +136,8 @@ app.post("/register", (req, res) => {
     }
   });
 });
+
+
 
 //READ BOOKS
 app.get("/admin/books", (req, res) => {

@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import FrontContext from "./FrontContext";
 import Book from "./Book";
+import Search from "./Search";
+
 
 
 function BooksList() {
@@ -9,6 +11,7 @@ function BooksList() {
   return (
    
         <div className="col-12 ">
+  
           <h2>Knygų sąrašas</h2>
           <div className="book-list-group">
           <ul className="book-list">

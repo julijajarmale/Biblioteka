@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import BooksList from "./List";
 import ReservationList from "./ReservationList";
 
+
 function Front() {
 
   const [lastUpdate, setLastUpdate] = useState(Date.now());
@@ -15,8 +16,10 @@ function Front() {
   const [reservations, setReservations] = useState(null);
   const [createReservation, setCreateReservation] = useState(null);
   const [rateNow, setRateNow] = useState(null);
+ 
   
-
+  
+ 
   
 
 //READ BOOKS
@@ -60,6 +63,7 @@ useEffect(() => {
        setReservations,
        setCreateReservation,
        setRateNow,
+      
        
 
       }}
