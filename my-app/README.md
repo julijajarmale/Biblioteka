@@ -1,3 +1,22 @@
+# FINALINIS ATSISKAITYMO PROJEKTAS
+
+
+
+Site published at:
+
+Design: Julija Ilginyte-Jarmale
+
+## Project features
+
+- React.JS
+- Express.JS
+- HTML/CSS/JS
+
+
+## Author
+
+Julija Ilginytė-Jarmalė: [Github](https://github.com/julijajarmale) [LinkedIn](https://www.linkedin.com/in/julija-ilginyte-jarmale/) <br>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
