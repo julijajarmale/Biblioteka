@@ -46,6 +46,8 @@ function Reservation({ reservation,}) {
         </span>
         <b
           className="item">
+            {reservation.rate === 0.00 ? 
+            <>
             Įvertinkite paslaugos kokybę:
         <select value={rate} onChange={rateIt}>
             {[...Array(10)].map((_, i) => (
@@ -54,7 +56,9 @@ function Reservation({ reservation,}) {
               </option>
             ))}
           </select>
-          {rate ? Number(rate).toFixed(2) : '0.00'}
+          </> : null}
+          Jūsų vertinimas:
+          {reservation.rate ? Number(reservation.rate).toFixed(2) : '0.00'}
           </b>
           
       </div>

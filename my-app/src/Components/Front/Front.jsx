@@ -55,6 +55,9 @@ useEffect(() => {
       });
   }, [rateNow]);
 
+
+   
+
   return (
     <FrontContext.Provider
       value={{
@@ -70,8 +73,10 @@ useEffect(() => {
     >
        
         <FrontNav />
+       
         <div className="container">
         <div className="row">
+        
            <ReservationList/>
           </div>
           <div className="row">
