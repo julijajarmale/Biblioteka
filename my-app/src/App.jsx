@@ -23,14 +23,14 @@ function App() {
         path="/"
           element={
             <RequireAuth role="user">
-              <Front/>
+              <Front show="front"/>
             </RequireAuth>
           }
         />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<LogoutPage />} />
-        <Route path='/register' element={<RegisterPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route
           path="/admin"
           element={
@@ -137,10 +137,11 @@ function RegisterPage() {
   const [email, setEmail] = useState('');
 
   const doRegister = () => {
-    axios.post('http://localhost:3003/register', { user, pass, email }).then((res) => {
-      if ('ok' === res.data.msg) {
+    axios.post("http://localhost:3003/register", { user, email, pass }).then((res) => {
+      localStorage.setItem('username', user);
+      if ("ok" === res.data.msg) {
         login(res.data.key);
-        navigate('/', { replace: true });
+        navigate("/", { replace: true });
       }
     });
   };

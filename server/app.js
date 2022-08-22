@@ -234,7 +234,7 @@ app.get("/books", (req, res) => {
   //READ RESERVATION
 app.get("/reservation", (req, res) => {
     const sql = `
-  SELECT reservation.id, reservation.name,  reservation.date, reservation.date_end, reservation.book_id, books.title AS title, books.author AS author, books.photo AS photo, approved, next_date
+  SELECT reservation.id, reservation.name,  reservation.date, reservation.date_end, reservation.book_id, books.title AS title, books.author AS author, books.photo AS photo, approved, next_date, reservation.rate
   FROM reservation
   LEFT JOIN books
   ON books.id = reservation.book_id 
@@ -354,8 +354,18 @@ app.delete("/admin/reservations/:id", (req, res) => {
     );
   });
 
-
-
+//create rating
+  app.put("/reservation/:id", (req, res) => {
+    const sql = `
+          UPDATE reservation
+          SET rate = ?
+          WHERE id = ?
+      `;
+    con.query(sql, [req.body.rate, req.params.id], (err, result) => {
+      if (err) throw err;
+      res.send({ result, msg: { text: "Tu prabalsavai", type: "danger" } });
+    });
+  });
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

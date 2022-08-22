@@ -8,15 +8,13 @@ import { useEffect, useState } from "react";
 import BooksList from "./List";
 import ReservationList from "./ReservationList";
 
-
-
-
 function Front() {
 
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [books, setBooks] = useState(null);
   const [reservations, setReservations] = useState(null);
   const [createReservation, setCreateReservation] = useState(null);
+  const [rateNow, setRateNow] = useState(null);
   
 
   
@@ -43,7 +41,16 @@ useEffect(() => {
   });
 }, [createReservation]);
 
-
+ // Rate
+  // Create
+  useEffect(() => {
+    if (null === rateNow) return;
+    axios
+      .put("http://localhost:3003/reservation/" + rateNow.id, rateNow, authConfig())
+      .then((_) => {
+        setLastUpdate(Date.now());
+      });
+  }, [rateNow]);
 
   return (
     <FrontContext.Provider
@@ -51,22 +58,24 @@ useEffect(() => {
        books,
        reservations, 
        setCreateReservation,
-       
+       setRateNow,
        
 
       }}
     >
+       
+        <FrontNav />
+        <div className="container">
+        <div className="row">
+           <ReservationList/>
+          </div>
+          <div className="row">
+            <BooksList/>
+          </div>
+        </div>
       
                     
-                    <FrontNav />
-      <div className="container">
-      <div className="row">
-         <ReservationList/>
-        </div>
-        <div className="row">
-          <BooksList/>
-        </div>
-      </div>
+                    
                     
                    
             

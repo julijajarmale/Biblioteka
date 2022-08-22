@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import FrontContext from "./FrontContext";
 
 
 function Reservation({ reservation,}) {
 
+  const { setRateNow,} = useContext(FrontContext);
   const [rate, setRate] = useState(0);
    
-  const rateNow = (e) => {
+
+  //const handleRating = () => {
+  //  const data = { rate: rate,
+  //    reservation: reservation.id };
+  //    setRateNow(data);
+  //};
+
+  const rateIt = (e) => {
     setRate(e.target.value);
-  }
+    setRateNow({
+      rate: parseInt(e.target.value),
+      id: reservation.id,
+    });
+  };
     return (
       <li className="book-list-item">
       <div className="content">
@@ -34,7 +47,7 @@ function Reservation({ reservation,}) {
         <b
           className="item">
             Įvertinkite paslaugos kokybę:
-        <select value={rate} onChange={rateNow}>
+        <select value={rate} onChange={rateIt}>
             {[...Array(10)].map((_, i) => (
               <option key={i} value={10 - i}>
                 {10 - i} *
@@ -43,6 +56,7 @@ function Reservation({ reservation,}) {
           </select>
           {rate ? Number(rate).toFixed(2) : '0.00'}
           </b>
+          
       </div>
     </li>
     );
